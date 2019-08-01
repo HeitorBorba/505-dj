@@ -1,34 +1,56 @@
+let nome = document.querySelector("#Nome");
+let email = document.querySelector("#Email");
+let confirme = document.querySelector("#Confirme");
+let senha = document.querySelector("#Senha");
+let genero = document.querySelector("#Sexo");
+let h2 = document.querySelector("h2");
+let botao = document.querySelector("button");
+let a = document.querySelector("a");
 
 let div = document.querySelector("div");
 let section = document.querySelector("section");
-let texto = document.querySelector("input");
-let botao = document.querySelector("button");
-let texto2 = document.querySelector("h2");
-let naoSouEu = document.querySelector("a");
+
 
 if(localStorage.nome){
-    div.style.display = "none";
-    texto2.innerHTML=`Seja bem-vindo ${localStorage.nome}`;
-    naoSouEu.innerHTML=`Não sou ${localStorage.nome} ?`;
-}
-else{
-    div.style.display="block";
-    section.style.display="none";
-    function cadastrar(){
-        localStorage.setItem("nome", texto.value);
-        if(localStorage.nome){
-            div.style.display = "none";
-            section.style.display="block"
-            texto2.innerHTML=`Seja bem-vindo ${localStorage.nome}`;
-            naoSoueu.innerHTML=`Não sou ${localStorage.nome}?`;
+    h2.innerHTML = `Seja bem vindo ${localStorage.nome}`;
+    h2.style.color = 'Red';
+    h2.style.flexDirection = 'column';
+    h2.style.alignItems = 'center'
+    h2.style.justifyContent = 'center'
+    a.innerHTML = `Não é  ${localStorage.nome}`;
+    a.style.color = 'red';
+    div.style.display = `none`;
+    section.style.display = `initial`;
+    
+} else {
+    function acessar(){
+        
+        localStorage.setItem("nome", nome.value);
+        localStorage.setItem("email", email.value);
+        localStorage.setItem("senha", senha.value);
+        localStorage.setItem("genero", genero.value);
+        
+        
+        div.style.display = "initial";
+        
+        if(email.value == confirme.value){
+            h2.innerHTML = `Seja bem vindo ${localStorage.nome}`;
+            h2.style.color = "red";
+            a.innerHTML = `Não é ${localStorage.nome}`;
+            a.style.color = "Red";
+            div.style.display = `none`;
+            section.style.display = `initial`;
+        } else {
+            alert("Email nao corresponde");
         }
     }
 }
 
 
- function limparStorage(){
-    localStorage.clear();
+function reset() {
+    localStorage.clear("nome");
 }
 
-botao.onclick = Cadastre-se ;
-naoSou.onclick = limparStorage;
+botao.onclick = acessar;
+
+a.onclick = reset;
